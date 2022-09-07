@@ -1,5 +1,10 @@
-#!/bin/bash
+#!/bin/bash -x
 
-#Esto es un comentario
-read -p "Ingrese su nombre: " nombre
-echo "Hola $nombre"
+read -p "Ingrese un nombre de archivo: " arc 
+
+if [ -f $arc ]
+then
+	rm $arc
+else
+	echo "No existe el archivo"
+fi

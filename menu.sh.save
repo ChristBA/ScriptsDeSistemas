@@ -1,0 +1,9 @@
+
+
+
+case $opc in
+	1)
+		./usuarios.sh
+	;;
+	2)
+		./base.sh

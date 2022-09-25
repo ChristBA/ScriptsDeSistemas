@@ -1,5 +1,6 @@
 #!/bin/bash
 
+touch usu.txt
 while [ "$opcion" != "3" ]
 do
 	echo "1) Registrarse en el sistema"
@@ -21,7 +22,7 @@ do
 				echo "El dato no puede estar vacio"
 			else
 				echo "Ingrese su contraseña"
-				read con
+				read -s con
 				if [ -z $con ]
 				then
 					echo "El dato no puede estar vacio"
@@ -38,21 +39,20 @@ do
 		fi
 		;;
 		2)
-		echo "Ingrese su cedula"
-		read ced
 		echo "Ingrese su nombre de usuario"
 		read nom
 		echo "Ingrese su contraseña"
 		read con
-		existeusu=
-		existepass=
-		if [ $existeusu -eq 0 ]
+		existeusu=$(cut -d":" -f2 usu.txt| grep -w "$nom")
+		if [ -z $existeusu ]
 		then
 			echo "El usuario no existe"
 		else
-			if [ $existepass -eq 0 ]
+			compcon=$(grep "$nom" usu.txt|cut -d":" -f3 )
+			echo "$compcon"
+			if [ $compcon != $con ]
 			then
-				echo "Contraseña incorrecta"
+				echo "La contraseña es incorrecta"
 			else
 				echo "Bienvenido"
 			fi
